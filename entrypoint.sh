@@ -6,10 +6,8 @@ if [ -d /var/www/html/.docker/prod/scripts ]; then
     done
 fi
 
-chown -R www-data:www-data /var/www/html
-
 if [ $# -gt 0 ]; then
     exec "$@"
 else
-    exec php /var/www/html/artisan octane:start --server=swoole --host=0.0.0.0 --port=8000
+    exec supervisord -c /etc/supervisor/supervisord.conf
 fi
