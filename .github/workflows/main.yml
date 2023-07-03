@@ -34,7 +34,7 @@ jobs:
         with:
           context: .
           tags: lorenzocattaneo/laravel:8.2
-          platforms: linux/arm64,linux/amd64,linux/arm/v7,linux/riscv64,linux/ppc64le
+          platforms: linux/arm64,linux/amd64,linux/arm/v7,linux/ppc64le
           push: true
           provenance: false
           
@@ -43,6 +43,6 @@ jobs:
         with:
           context: ./dev
           tags: lorenzocattaneo/laravel:8.2-dev
-          platforms: linux/arm64,linux/amd64,linux/arm/v7,linux/riscv64,linux/ppc64le
+          platforms: linux/arm64,linux/amd64,linux/arm/v7,linux/ppc64le
           push: true
           provenance: false
