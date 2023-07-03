@@ -14,13 +14,10 @@ if [ ! -d /var/www/html/node_modules ]; then
     npm install
 fi
 
-chown -R www-data:www-data /var/www/html
-
 echo "y" | php /var/www/html/artisan migrate
 
 if [ $# -gt 0 ]; then
     exec "$@"
 else
-    (npm run dev&)
-    exec php /var/www/html/artisan octane:start --server=swoole --host=0.0.0.0 --port=8000 --watch
+    exec supervisord -c /etc/supervisor/supervisord.conf
 fi
