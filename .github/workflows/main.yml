@@ -30,18 +30,28 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           
       - name: Build and Push Image
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           tags: lorenzocattaneo/laravel:8.2
-          platforms: linux/arm64,linux/amd64,linux/arm/v7,linux/arm64/v8
+          platforms: linux/arm64,linux/amd64
           push: true
-      
+          provenance: false
+          
       - name: Build and Push Image
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: ./dev
           tags: lorenzocattaneo/laravel:8.2-dev
-          platforms: linux/arm64,linux/amd64,linux/arm/v7,linux/arm64/v8
+          platforms: linux/arm64,linux/amd64
           push: true
+          provenance: false
+      
+#       - name: Build and Push Image
+#         uses: docker/build-push-action@v3
+#         with:
+#           context: ./dev
+#           tags: lorenzocattaneo/laravel:8.2
+#           platforms: linux/arm64,linux/amd64,linux/arm/v7,linux/arm64/v8
+#           push: true
       
