@@ -1,7 +1,7 @@
 FROM php:8.2-fpm-bookworm
 
 # Types: octane-swoole, octane-rr, fpm
-ARG SERVER_TYPE='octane-swoole' 
+ENV SERVER_TYPE='octane-swoole' 
 
 # Install dependencies
 RUN apt-get update  \
@@ -42,10 +42,8 @@ RUN pecl install \
         soap \
         zip
 
-COPY ./nginx/nginx-${SERVER_TYPE}.conf /etc/nginx/sites-available/default
-COPY ./supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY ./supervisor/nginx.conf /etc/supervisor/conf.d/nginx.conf
-COPY ./supervisor/${SERVER_TYPE}.conf /etc/supervisor/conf.d
+COPY ./nginx /etc/nginx/templates
+COPY ./supervisor /etc/supervisor/templates
 COPY ./entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
