@@ -14,6 +14,7 @@ RUN apt-get update  \
     htop \
     vim \
     nodejs \
+    npm \
     && rm -rf /var/lib/apt/lists/*
 
 COPY ./supervisor /etc/supervisor/templates
