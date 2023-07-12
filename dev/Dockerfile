@@ -23,5 +23,7 @@ RUN chmod +x /entrypoint.sh
 
 # Setup working directory
 WORKDIR /var/www/html
+EXPOSE 5173
 EXPOSE 8000
+EXPOSE 13714
 ENTRYPOINT ["/entrypoint.sh"]
