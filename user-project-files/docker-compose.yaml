@@ -1,0 +1,48 @@
+version: '3.9'
+
+services:
+  app:
+    image: lorenzocattaneo/laravel:8.2-dev
+    ports:
+      - "8000:80"
+      - "5173:5173"
+    volumes:
+      - .:/var/www/html
+    networks:
+      - app-network
+    depends_on:
+      - db
+
+  queue:
+    image: lorenzocattaneo/laravel:8.2-dev
+    volumes:
+      - .:/var/www/html
+    networks:
+      - app-network
+    depends_on:
+      - db
+    command: php artisan queue:work
+
+  db:
+    image: mariadb:11.1-rc
+    ports:
+      - "3336:3306"
+    volumes:
+      - ./dbdata:/var/lib/mysql
+    networks:
+      - app-network
+    environment:
+      MARIADB_DATABASE: db_test
+      MARIADB_ROOT_PASSWORD: password
+
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

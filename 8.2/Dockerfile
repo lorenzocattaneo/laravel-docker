@@ -18,6 +18,7 @@ RUN apt-get update  \
     cron \
     nginx \
     supervisor \
+    rsync \
     && rm -rf /var/lib/apt/lists/*
 
 # Install php extensions
@@ -49,5 +50,6 @@ RUN chmod +x /entrypoint.sh
 
 # Setup working directory
 WORKDIR /var/www/html
+EXPOSE 80
 EXPOSE 8000
 ENTRYPOINT ["/entrypoint.sh"]
