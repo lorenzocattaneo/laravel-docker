@@ -32,7 +32,7 @@ jobs:
       - name: Build and Push Image
         uses: docker/build-push-action@v4
         with:
-          context: .
+          context: ./8.2
           tags: lorenzocattaneo/laravel:8.2
           platforms: linux/arm64,linux/amd64,linux/arm/v7,linux/ppc64le
           push: true
@@ -41,7 +41,7 @@ jobs:
       - name: Build and Push Image
         uses: docker/build-push-action@v4
         with:
-          context: ./dev
+          context: ./8.2/dev
           tags: lorenzocattaneo/laravel:8.2-dev
           platforms: linux/arm64,linux/amd64,linux/arm/v7,linux/ppc64le
           push: true
