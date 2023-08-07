@@ -13,6 +13,7 @@ RUN apt-get update  \
     libjpeg62-turbo-dev \
     libpng-dev \
     libzip-dev \
+    libxml2-dev \
     zip \
     unzip \
     cron \

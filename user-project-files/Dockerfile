@@ -1,7 +1,7 @@
 FROM composer:2.5 as composer
 WORKDIR /app
 COPY . .
-RUN composer install --optimize-autoloader --no-dev
+RUN composer install --optimize-autoloader --no-dev --ignore-platform-reqs
 
 FROM node:18 as node-builder
 WORKDIR /app
