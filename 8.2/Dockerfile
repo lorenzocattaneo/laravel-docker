@@ -23,10 +23,12 @@ RUN apt-get update  \
 
 # Install php extensions
 RUN pecl install \
+        apcu \
         redis \
         swoole \
         imagick \
         && docker-php-ext-enable \
+        apcu \
         redis \
         swoole \
         imagick \

@@ -3,7 +3,7 @@
 cp /etc/nginx/templates/nginx-$SERVER_TYPE.conf /etc/nginx/sites-enabled/default
 cp /etc/supervisor/templates/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 cp /etc/supervisor/templates/nginx.conf /etc/supervisor/conf.d/nginx.conf
-cp /etc/supervisor/templates/$SERVER_TYPE.conf /etc/supervisor/conf.d/$SERVER_TYPE.conf
+cp /etc/supervisor/templates/$SERVER_TYPE.conf /etc/supervisor/conf.d/server.conf
 
 if [ -d /var/www/html/.docker/prod/scripts ]; then
     for f in /var/www/html/.docker/prod/scripts/*.sh; do
