@@ -1,7 +1,7 @@
 FROM lorenzocattaneo/laravel:8.2
 
 # Types: octane-swoole, octane-rr, fpm
-ENV SERVER_TYPE='octane-swoole' 
+ENV SERVER_TYPE='fpm' 
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 

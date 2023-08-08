@@ -1,7 +1,7 @@
 FROM php:8.2-fpm-bookworm
 
 # Types: octane-swoole, octane-rr, fpm
-ENV SERVER_TYPE='octane-swoole' 
+ENV SERVER_TYPE='fpm' 
 
 # Install dependencies
 RUN apt-get update  \
