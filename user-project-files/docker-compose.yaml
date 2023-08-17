@@ -21,7 +21,19 @@ services:
       - app-network
     depends_on:
       - db
+      - app
     command: php artisan queue:work
+
+  schedule:
+    image: lorenzocattaneo/laravel:8.2-dev
+    volumes:
+      - .:/var/www/html
+    networks:
+      - app-network
+    depends_on:
+      - db
+      - app
+    command: php artisan schedule:work
 
   db:
     image: mariadb:11.1-rc
