@@ -1,4 +1,4 @@
-FROM php:8.2-fpm-bookworm
+FROM php:8.3-fpm-bookworm
 
 # Types: octane-swoole, octane-rr, fpm
 ENV SERVER_TYPE='fpm' 
