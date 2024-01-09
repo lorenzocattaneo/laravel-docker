@@ -1,6 +1,6 @@
 FROM php:8.3-fpm-bookworm
 
-# Types: octane-swoole, octane-rr, fpm
+# Types: octane-swoole, octane-rr,octane-frankenphp, fpm
 ENV SERVER_TYPE='fpm' 
 
 # Install dependencies
@@ -22,17 +22,29 @@ RUN apt-get update  \
     rsync \
     && rm -rf /var/lib/apt/lists/*
 
+# Install imagick extension
+# The latest tagged version 3.7.0 is incompatible with php 8.3
+# Build and install from master where the error is fixed
+RUN curl -L -o /tmp/imagick.tar.gz https://github.com/Imagick/imagick/archive/7088edc353f53c4bc644573a79cdcd67a726ae16.tar.gz \
+    && tar --strip-components=1 -xf /tmp/imagick.tar.gz \
+    && phpize \
+    && ./configure \
+    && make \
+    && make install \
+    && echo "extension=imagick.so" > /usr/local/etc/php/conf.d/ext-imagick.ini \
+    && rm -rf /tmp/*
+
 # Install php extensions
 RUN pecl install \
         apcu \
         redis \
         swoole \
-        imagick \
+        #imagick \
         && docker-php-ext-enable \
         apcu \
         redis \
         swoole \
-        imagick \
+        #imagick \
         && docker-php-ext-configure gd --with-freetype --with-jpeg \
         && docker-php-ext-install \
         bcmath \
