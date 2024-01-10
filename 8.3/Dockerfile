@@ -25,6 +25,7 @@ RUN apt-get update  \
 # Install imagick extension
 # The latest tagged version 3.7.0 is incompatible with php 8.3
 # Build and install from master where the error is fixed
+WORKDIR /home
 RUN curl -L -o /tmp/imagick.tar.gz https://github.com/Imagick/imagick/archive/7088edc353f53c4bc644573a79cdcd67a726ae16.tar.gz \
     && tar --strip-components=1 -xf /tmp/imagick.tar.gz \
     && phpize \

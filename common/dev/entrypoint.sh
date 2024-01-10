@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 
-if [$SERVER_TYPE -neq "octane-frankenphp"]
+if [ $SERVER_TYPE != "octane-frankenphp" ]; then
   cp /etc/nginx/templates/nginx-$SERVER_TYPE.conf /etc/nginx/sites-enabled/default
   cp /etc/supervisor/templates/nginx.conf /etc/supervisor/conf.d/nginx.conf
 fi
@@ -14,6 +14,14 @@ if [ -d /var/www/html/.docker/dev/scripts ]; then
     for f in /var/www/html/.docker/dev/scripts/*.sh; do
         bash "$f" || break
     done
+fi
+
+if [ ! -d /var/www/html/frankenphp -a $SERVER_TYPE = "octane-frankenphp" ]; then
+    echo "yes" | php artisan octane:install --server=frankenphp
+fi
+
+if [ ! -d /var/www/html/rr -a $SERVER_TYPE = "octane-rr" ]; then
+    echo "yes" | php /var/www/html/artisan octane:install --server=roadrunner
 fi
 
 if [ ! -d /var/www/html/vendor ]; then
