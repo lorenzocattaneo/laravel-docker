@@ -2,6 +2,7 @@ FROM lorenzocattaneo/laravel:8.3
 
 # Types: octane-swoole, octane-rr, octane-frankenphp, fpm
 ENV SERVER_TYPE='fpm' 
+ENV LARAVEL_QUEUES='default'
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 

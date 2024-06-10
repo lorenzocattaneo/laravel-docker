@@ -16,12 +16,20 @@ if [ -d /var/www/html/.docker/dev/scripts ]; then
     done
 fi
 
+if [ $SERVER_TYPE =~ "octane" ]; then
+    composer require laravel/octane
+fi
+
 if [ ! -d /var/www/html/frankenphp -a $SERVER_TYPE = "octane-frankenphp" ]; then
     echo "yes" | php artisan octane:install --server=frankenphp
 fi
 
 if [ ! -d /var/www/html/rr -a $SERVER_TYPE = "octane-rr" ]; then
     echo "yes" | php /var/www/html/artisan octane:install --server=roadrunner
+fi
+
+if [ $SERVER_TYPE = "octane-swoole" ]; then
+    echo "yes" | php /var/www/html/artisan octane:install --server=swoole
 fi
 
 if [ ! -d /var/www/html/vendor ]; then

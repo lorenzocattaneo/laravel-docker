@@ -1,0 +1,35 @@
+services:
+  app:
+    image: lorenzocattaneo/laravel:8.3-dev
+    ports:
+      - "8000:80"
+      - "5173:5173"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+    # environment:
+    #   set this to enable multiple queues. The default queue will run even if this is commented out
+    #   - LARAVEL_QUEUES=default,high
+    #   can be "fpm", "octane-frankenphp", "octane-swoole" or "octane-rr"
+    #   - SERVER_TYPE=octane-frankenphp
+
+  db:
+    image: mariadb:11.1-rc
+    ports:
+      - "3336:3306"
+    volumes:
+      - ./dbdata:/var/lib/mysql
+    environment:
+      MARIADB_DATABASE: db_test
+      MARIADB_ROOT_PASSWORD: password
+
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+networks:
+  default:
+    driver: bridge

@@ -10,7 +10,7 @@ COPY --from=composer /app/vendor /app/vendor
 RUN npm install  \
     && npm run build
 
-FROM lorenzocattaneo/laravel:8.2
+FROM lorenzocattaneo/laravel:8.3
 COPY . /var/www/html
 COPY --from=composer /app/vendor ./vendor
 COPY --from=node-builder /app/public /var/www/html/public-npm
