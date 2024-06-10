@@ -30,7 +30,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           
       - name: Build and Push Image
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           context: .
           file: ./8.2/Dockerfile
@@ -38,9 +38,11 @@ jobs:
           platforms: linux/arm64,linux/amd64
           push: true
           provenance: false
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           
       - name: Build and Push Image
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           context: .
           file: ./8.2/dev/Dockerfile
@@ -48,9 +50,11 @@ jobs:
           platforms: linux/arm64,linux/amd64
           push: true
           provenance: false
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Build and Push Image
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           context: .
           file: ./8.3/Dockerfile
@@ -58,9 +62,11 @@ jobs:
           platforms: linux/arm64,linux/amd64
           push: true
           provenance: false
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           
       - name: Build and Push Image
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           context: .
           file: ./8.3/dev/Dockerfile
@@ -68,3 +74,5 @@ jobs:
           platforms: linux/arm64,linux/amd64
           push: true
           provenance: false
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
