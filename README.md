@@ -27,6 +27,8 @@ You can list the names of the queues just like you would when running the queue 
 
 If you only plan to run the `default` queue this env variable can be omitted.
 
+The queue timeout can be customised by setting `LARAVEL_QUEUE_TIMEOUT` to the number of desired seconds.
+
 ### Customising the supervisor configuration
 
 All the default Supervisor configuration files for dev are found in `common/dev/supervisor`

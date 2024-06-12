@@ -3,6 +3,7 @@ FROM lorenzocattaneo/laravel:8.2
 # Types: octane-swoole, octane-rr, octane-frankenphp, fpm
 ENV SERVER_TYPE='fpm' 
 ENV LARAVEL_QUEUES='default'
+ENV LARAVEL_QUEUE_TIMEOUT=120
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 

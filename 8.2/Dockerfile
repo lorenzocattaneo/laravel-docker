@@ -3,6 +3,7 @@ FROM php:8.2-fpm-bookworm
 # Types: octane-swoole, octane-rr, fpm, octane-frankenphp
 ENV SERVER_TYPE='fpm' 
 ENV LARAVEL_QUEUES='default'
+ENV LARAVEL_QUEUE_TIMEOUT=120
 
 # Install dependencies
 RUN apt-get update  \

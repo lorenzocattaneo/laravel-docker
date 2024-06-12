@@ -11,6 +11,8 @@ services:
     # environment:
     #   set this to enable multiple queues. The default queue will run even if this is commented out
     #   - LARAVEL_QUEUES=default,high
+    #   set this to change laravel queues timeout
+    #   - LARAVEL_QUEUE_TIMEOUT=3600
     #   can be "fpm", "octane-frankenphp", "octane-swoole" or "octane-rr"
     #   - SERVER_TYPE=octane-frankenphp
 
