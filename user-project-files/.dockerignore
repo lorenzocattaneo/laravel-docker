@@ -1,5 +1,6 @@
 .devcontainer
 dbdata
+database/*.sqlite
 bootstrap/cache/*
 storage/framework/cache/*
 storage/framework/sessions/*
@@ -22,3 +23,4 @@ fly.toml
 **/.DS_Store
 **/Thumbs.db
 public/hot
+

@@ -2,8 +2,6 @@ FROM php:8.2-fpm-bookworm
 
 # Types: octane-swoole, octane-rr, fpm, octane-frankenphp
 ENV SERVER_TYPE='fpm' 
-ENV LARAVEL_QUEUES='default'
-ENV LARAVEL_QUEUE_TIMEOUT=120
 
 # Install dependencies
 RUN apt-get update  \
@@ -53,8 +51,18 @@ COPY ./common/supervisor /etc/supervisor/templates
 COPY ./common/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
+# Set file permissions
+RUN chown -R www-data:www-data /var/www/
+RUN chown -R www-data:www-data /var/log/
+RUN chown -R www-data:www-data /etc/nginx/
+RUN chown -R www-data:www-data /etc/supervisor/
+RUN chown -R www-data:www-data /var/run/
+RUN chown -R www-data:www-data /var/lib/nginx/
+
 # Setup working directory
 WORKDIR /var/www/html
+USER www-data
+
 EXPOSE 80
 EXPOSE 8000
 ENTRYPOINT ["/entrypoint.sh"]

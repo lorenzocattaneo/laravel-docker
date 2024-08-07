@@ -9,12 +9,26 @@ services:
     depends_on:
       - db
     # environment:
-    #   set this to enable multiple queues. The default queue will run even if this is commented out
-    #   - LARAVEL_QUEUES=default,high
-    #   set this to change laravel queues timeout
-    #   - LARAVEL_QUEUE_TIMEOUT=3600
     #   can be "fpm", "octane-frankenphp", "octane-swoole" or "octane-rr"
     #   - SERVER_TYPE=octane-frankenphp
+
+  # queue:
+  #   image: lorenzocattaneo/laravel:8.3-dev
+  #   command: php artisan queue:listen
+  #   volumes:
+  #     - .:/var/www/html
+  #   depends_on:
+  #     - app
+  #     - db
+  
+  # schedule:
+  #   image: lorenzocattaneo/laravel:8.3-dev
+  #   command: php artisan schedule:work
+  #   volumes:
+  #     - .:/var/www/html
+  #   depends_on:
+  #     - app
+  #     - db
 
   db:
     image: mariadb:11.1-rc
@@ -31,6 +45,11 @@ services:
     ports:
       - "1025:1025"
       - "8025:8025"
+
+  # redis:
+  #   image: redis:6.2-alpine
+  #   ports:
+  #     - "6379:6379"
 
 networks:
   default:

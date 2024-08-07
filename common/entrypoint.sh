@@ -9,8 +9,13 @@ fi
 cp /etc/supervisor/templates/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 cp /etc/supervisor/templates/$SERVER_TYPE.conf /etc/supervisor/conf.d/server.conf
 
-if [ -d /var/www/html/.docker/prod/scripts ]; then
-    for f in /var/www/html/.docker/prod/scripts/*.sh; do
+if [ -d /var/www/html/.docker/prod/supervisor ]; then
+    echo "copying additional supervisor config files"
+    cp /var/www/html/.docker/prod/supervisor/*.conf /etc/supervisor/conf.d/
+fi
+
+if [ -d /var/www/html/.docker/prod/pre-init-scripts ]; then
+    for f in /var/www/html/.docker/prod/pre-init-scripts/*.sh; do
         bash "$f" || break
     done
 fi
@@ -23,12 +28,19 @@ if [ ! -d /var/www/html/rr -a $SERVER_TYPE = "octane-rr" ]; then
     echo "yes" | php /var/www/html/artisan octane:install --server=roadrunner
 fi
 
+/var/www/html/php artisan storage:link -q
 /var/www/html/php artisan icons:clear
 /var/www/html/php artisan optimize:clear
 /var/www/html/php artisan optimize
 /var/www/html/php artisan view:cache
 /var/www/html/php artisan icons:cache
 /var/www/html/php artisan event:cache
+
+if [ -d /var/www/html/.docker/prod/post-init-scripts ]; then
+    for f in /var/www/html/.docker/prod/post-init-scripts/*.sh; do
+        bash "$f" || break
+    done
+fi
 
 if [ $# -gt 0 ]; then
     exec "$@"
