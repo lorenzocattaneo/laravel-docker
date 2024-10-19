@@ -6,6 +6,7 @@ ENV SERVER_TYPE='fpm'
 # Install dependencies
 RUN apt-get update  \
     && apt-get install -y \
+    libffi-dev \
     libicu-dev \
     libpq-dev \
     libmagickwand-dev \
@@ -35,6 +36,7 @@ RUN pecl install \
         imagick \
         && docker-php-ext-configure gd --with-freetype --with-jpeg \
         && docker-php-ext-install \
+        ffi \
         bcmath \
         calendar \
         exif \
