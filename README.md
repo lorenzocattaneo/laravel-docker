@@ -10,18 +10,20 @@ These images provide:
 ## Customisation
 
 ### Choosing the server
-By default PHP-FPM is selected. 
+By default PHP-FPM is selected.
 You can change this setting by overriding the `SERVER_TYPE` environment variable.
 
 In `user-project-files` a sample `compose.yaml` is provided. Uncomment the `environment` section in the `app` service to update this setting.
 
 If any of the Octane supported servers are selected, the entrypoint script will attempt to install Octane automatically.
 
+> !! PHP 8.4 currently uses swoole 6.0.0RC1. The latest swoole stable release (5.x) is **NOT** compatible with PHP 8.4.
+
 ### Customising the supervisor configuration
 
 All the default Supervisor configuration files for dev are found in `common/dev/supervisor`
 
-As seen in `common/dev/entrypoint.sh`, you may create a `.docker/dev/supervisor` folder in the root of your project and put any custom supervisor `.conf` files there. 
+As seen in `common/dev/entrypoint.sh`, you may create a `.docker/dev/supervisor` folder in the root of your project and put any custom supervisor `.conf` files there.
 These files will be copied to the supervisor `conf.d` folder at startup and used.
 
 ### Running tasks with compose services
@@ -41,7 +43,3 @@ To add a service you can run a custom command as such:
       - app
       - db
 ```
-
-
-
-
