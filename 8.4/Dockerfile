@@ -43,7 +43,7 @@ RUN curl -L -o /tmp/imagick.tar.gz https://github.com/Imagick/imagick/archive/70
 RUN pecl install \
         apcu \
         redis \
-        swoole-6.0.0RC1 \
+        swoole \
         #imagick \
         && docker-php-ext-enable \
         apcu \

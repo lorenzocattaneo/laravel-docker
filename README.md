@@ -1,6 +1,7 @@
 # Laravel Docker Image
 
 These images provide:
+
 - most PHP extensions enabled by default
 - a complete dev environment with node, npm and pre-configured supervisord
 - a `compose.yaml`, `Makefile` and `supervisor config` you can copy-paste in your project to get started quickly
@@ -10,14 +11,13 @@ These images provide:
 ## Customisation
 
 ### Choosing the server
+
 By default PHP-FPM is selected.
 You can change this setting by overriding the `SERVER_TYPE` environment variable.
 
 In `user-project-files` a sample `compose.yaml` is provided. Uncomment the `environment` section in the `app` service to update this setting.
 
 If any of the Octane supported servers are selected, the entrypoint script will attempt to install Octane automatically.
-
-> !! PHP 8.4 currently uses swoole 6.0.0RC1. The latest swoole stable release (5.x) is **NOT** compatible with PHP 8.4.
 
 ### Customising the supervisor configuration
 
