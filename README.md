@@ -16,9 +16,7 @@ Run the following command to install:
 curl -fsSL https://raw.githubusercontent.com/lorenzocattaneo/laravel-docker/main/install.sh | bash
 ```
 
-## Customisation
-
-By default, after running the install script, the following files are created:
+After running the install script, the following files are created:
 
 - `.dockerignore`
 - `compose.yaml`
@@ -28,6 +26,13 @@ By default, after running the install script, the following files are created:
 - `.docker/dev/php/custom-00.ini`
 
 The `Makefile` contains a set of commands to manage the dev environment. You can get started by running `make d.run`
+
+## Updating
+
+To make sure you have the latest version of the images, run `make d.update`.
+The updated images will be pulled and the container will be restarted.
+
+## Customisation
 
 By default the `compose.yaml` file runs a single service called `app` that, through supervisord, runs the following processes:
 

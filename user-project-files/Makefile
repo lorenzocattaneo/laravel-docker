@@ -1,3 +1,9 @@
+d.update:
+	@echo "⏳ Updating images. Please wait..."
+	@docker compose pull
+	@echo "Images updated. Restarting..."
+	@$(MAKE) d.run
+
 d.run:
 	@echo "⏳ Starting app. Please wait..."
 	@docker compose up -d --force-recreate
