@@ -1,6 +1,6 @@
 services:
   app:
-    image: lorenzocattaneo/laravel:8.3-dev
+    image: lorenzocattaneo/laravel:8.4-dev
     ports:
       - "8000:80"
       - "5173:5173"
@@ -13,16 +13,16 @@ services:
     #   - SERVER_TYPE=octane-frankenphp
 
   # queue:
-  #   image: lorenzocattaneo/laravel:8.3-dev
+  #   image: lorenzocattaneo/laravel:8.4-dev
   #   command: php artisan queue:listen
   #   volumes:
   #     - .:/var/www/html
   #   depends_on:
   #     - app
   #     - db
-  
+
   # schedule:
-  #   image: lorenzocattaneo/laravel:8.3-dev
+  #   image: lorenzocattaneo/laravel:8.4-dev
   #   command: php artisan schedule:work
   #   volumes:
   #     - .:/var/www/html
@@ -31,7 +31,7 @@ services:
   #     - db
 
   db:
-    image: mariadb:11.1-rc
+    image: mariadb:11.8
     ports:
       - "3336:3306"
     volumes:
@@ -39,6 +39,24 @@ services:
     environment:
       MARIADB_DATABASE: db_test
       MARIADB_ROOT_PASSWORD: password
+
+  # db:
+  #   image: pgvector/pgvector:pg17
+  #   restart: always
+  #   volumes:
+  #     - ./dbdata:/var/lib/postgresql/data
+  #   user: postgres
+  #   environment:
+  #     - POSTGRES_DB=postgres
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=postgres
+  #   ports:
+  #     - "5433:5432"
+  #   healthcheck:
+  #     test: [ "CMD", "pg_isready" ]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
 
   mailpit:
     image: axllent/mailpit:latest
