@@ -1,20 +1,16 @@
-FROM composer:2.5 as composer
+FROM composer:2.5 AS composer
 WORKDIR /app
 COPY . .
 RUN composer install --optimize-autoloader --no-dev --ignore-platform-reqs
 
-FROM node:18 as node-builder
+FROM node:18 AS node-builder
 WORKDIR /app
 COPY . .
 COPY --from=composer /app/vendor /app/vendor
 RUN npm install  \
     && npm run build
 
-FROM lorenzocattaneo/laravel:8.3
-COPY . /var/www/html
-COPY --from=composer /app/vendor ./vendor
-COPY --from=node-builder /app/public /var/www/html/public-npm
-RUN rsync -ar /var/www/html/public-npm/ /var/www/html/public/ \
-    && rm -rf /var/www/html/public-npm \
-    && chown -R www-data:www-data /var/www/html
-
+FROM lorenzocattaneo/laravel:8.4
+COPY --chown=www-data . /var/www/html
+COPY --from=composer --chown=www-data /app/vendor ./vendor/
+COPY --from=node-builder --chown=www-data /app/public /var/www/html/public/

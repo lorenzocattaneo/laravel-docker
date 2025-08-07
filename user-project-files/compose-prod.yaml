@@ -1,0 +1,51 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:80"
+      - "5173:5173"
+    env_file:
+      - .env.prod
+    depends_on:
+      - db
+    environment:
+      - SERVER_TYPE=octane-swoole
+
+  # queue:
+  #   image: lorenzocattaneo/laravel:8.3-dev
+  #   command: php artisan queue:listen
+  #   volumes:
+  #     - .:/var/www/html
+  #   depends_on:
+  #     - app
+  #     - db
+
+  # schedule:
+  #   image: lorenzocattaneo/laravel:8.3-dev
+  #   command: php artisan schedule:work
+  #   volumes:
+  #     - .:/var/www/html
+  #   depends_on:
+  #     - app
+  #     - db
+
+  db:
+    image: mariadb:11.1-rc
+    ports:
+      - "3336:3306"
+    volumes:
+      - ./dbdata:/var/lib/mysql
+    environment:
+      MARIADB_DATABASE: db_test
+      MARIADB_ROOT_PASSWORD: password
+
+  # redis:
+  #   image: redis:6.2-alpine
+  #   ports:
+  #     - "6379:6379"
+
+networks:
+  default:
+    driver: bridge
