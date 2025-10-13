@@ -4,6 +4,7 @@ FROM php:8.4-fpm-bookworm
 # Types: octane-swoole, octane-rr,octane-frankenphp, fpm
 ENV SERVER_TYPE='fpm'
 
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
 # Install dependencies
 RUN apt-get update  \
     && apt-get install -y \
@@ -16,12 +17,50 @@ RUN apt-get update  \
     libpng-dev \
     libzip-dev \
     libxml2-dev \
+    # puppeteer dependencies
+    libasound2 \
+    libatk-bridge2.0-0 \
+    libatk1.0-0 \
+    libatspi2.0-0 \
+    libc6 \
+    libcairo2 \
+    libcups2 \
+    libdbus-1-3 \
+    libdrm2 \
+    libexpat1 \
+    libgbm1 \
+    libglib2.0-0 \
+    libnspr4 \
+    libnss3 \
+    libpango-1.0-0 \
+    libpangocairo-1.0-0 \
+    libstdc++6 \
+    libudev1 \
+    libuuid1 \
+    libx11-6 \
+    libx11-xcb1 \
+    libxcb-dri3-0 \
+    libxcb1 \
+    libxcomposite1 \
+    libxcursor1 \
+    libxdamage1 \
+    libxext6 \
+    libxfixes3 \
+    libxi6 \
+    libxkbcommon0 \
+    libxrandr2 \
+    libxrender1 \
+    libxshmfence1 \
+    libxss1 \
+    libxtst6 \
+    # end puppeteer dependencies
     zip \
     unzip \
     cron \
     nginx \
     supervisor \
     rsync \
+    nodejs \
     && rm -rf /var/lib/apt/lists/*
 
 
@@ -63,6 +102,8 @@ RUN pecl install \
         pcntl \
         soap \
         zip
+
+RUN npm install puppeteer --location=global
 
 COPY ./common/nginx /etc/nginx/templates
 COPY ./common/supervisor /etc/supervisor/templates

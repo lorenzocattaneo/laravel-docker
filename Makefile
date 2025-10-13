@@ -1,3 +1,9 @@
+82:
+	docker buildx build -f ./8.2/Dockerfile -t lorenzocattaneo/laravel:8.2 .
+
+82-dev:
+	docker buildx build -f ./8.2/dev/Dockerfile -t lorenzocattaneo/laravel:8.2-dev .
+
 83:
 	docker buildx build -f ./8.3/Dockerfile -t lorenzocattaneo/laravel:8.3 .
 

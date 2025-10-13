@@ -3,6 +3,7 @@
 These images provide:
 
 - most PHP extensions enabled by default
+- puppeteer/browsershot dependencies installed by default
 - a complete dev environment with `node`, `npm` and pre-configured `supervisord`
 - support for PHP-FPM and Laravel Octane
 - a sample Dockerfile for production images

@@ -15,8 +15,6 @@ RUN apt-get update  \
     wget \
     htop \
     vim \
-    nodejs \
-    npm \
     && rm -rf /var/lib/apt/lists/*
 
 COPY ./common/dev/supervisor /etc/supervisor/templates

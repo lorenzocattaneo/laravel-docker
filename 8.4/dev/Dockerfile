@@ -8,7 +8,6 @@ USER root
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
-RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
 # Install dependencies
 RUN apt-get update  \
     && apt-get install -y \
@@ -17,7 +16,6 @@ RUN apt-get update  \
     wget \
     htop \
     vim \
-    nodejs \
     && rm -rf /var/lib/apt/lists/*
 
 COPY ./common/dev/supervisor /etc/supervisor/templates
