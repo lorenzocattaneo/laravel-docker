@@ -3,6 +3,8 @@ FROM php:8.4-fpm-bookworm
 
 # Types: octane-swoole, octane-rr,octane-frankenphp, fpm
 ENV SERVER_TYPE='fpm'
+ENV SHELL /bin/bash
+
 
 RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
 # Install dependencies

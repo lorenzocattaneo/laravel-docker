@@ -1,10 +1,11 @@
-FROM php:8.3-fpm-bookworm
+
+FROM php:8.5-fpm-bookworm
 
 # Types: octane-swoole, octane-rr,octane-frankenphp, fpm
-ENV SERVER_TYPE='fpm' 
+ENV SERVER_TYPE='fpm'
 ENV SHELL /bin/bash
 
-RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_22.x | bash -
 # Install dependencies
 RUN apt-get update  \
     && apt-get install -y \
@@ -63,30 +64,20 @@ RUN apt-get update  \
     nodejs \
     && rm -rf /var/lib/apt/lists/*
 
-# Install imagick extension
-# The latest tagged version 3.7.0 is incompatible with php 8.3
-# Build and install from master where the error is fixed
-WORKDIR /home
-RUN curl -L -o /tmp/imagick.tar.gz https://github.com/Imagick/imagick/archive/7088edc353f53c4bc644573a79cdcd67a726ae16.tar.gz \
-    && tar --strip-components=1 -xf /tmp/imagick.tar.gz \
-    && phpize \
-    && ./configure \
-    && make \
-    && make install \
-    && echo "extension=imagick.so" > /usr/local/etc/php/conf.d/ext-imagick.ini \
-    && rm -rf /tmp/*
 
-# Install php extensions
+WORKDIR /home
+
+# Install php extensions - Swoole is not supported yet
 RUN pecl install \
         apcu \
         redis \
-        swoole \
-        #imagick \
+        #swoole \
+        imagick \
         && docker-php-ext-enable \
         apcu \
         redis \
-        swoole \
-        #imagick \
+        #swoole \
+        imagick \
         && docker-php-ext-configure gd --with-freetype --with-jpeg \
         && docker-php-ext-install \
         ffi \

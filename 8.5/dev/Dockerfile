@@ -1,4 +1,5 @@
-FROM lorenzocattaneo/laravel:8.2
+
+FROM lorenzocattaneo/laravel:8.5
 
 # Types: octane-swoole, octane-rr, octane-frankenphp, fpm
 ENV SERVER_TYPE='fpm' 

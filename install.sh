@@ -48,6 +48,8 @@ download_file "$REPO_URL/user-project-files/compose.yaml" "compose.yaml"
 download_file "$REPO_URL/user-project-files/Makefile" "Makefile"
 download_file "$REPO_URL/user-project-files/Dockerfile" "Dockerfile"
 
+ensure_directory ".devcontainer"
+download_file "$REPO_URL/user-project-files/devcontainer.json" ".devcontainer/devcontainer.json"
 ensure_directory ".docker/dev/supervisor"
 download_file "$REPO_URL/user-project-files/custom-supervisor-example.conf" ".docker/dev/supervisor/laravel-dev.conf"
 ensure_directory ".docker/dev/php"
@@ -60,6 +62,7 @@ echo -e "${YELLOW}📖 Next steps:${NC}"
 echo "1. Review and customize the downloaded files for your project"
 echo "2. Check the project documentation at: https://github.com/lorenzocattaneo/laravel-docker"
 echo "3. Run 'make d.run' to start your Laravel development environment"
+echo "4. The project is ready. If your editor supports it, a devcontainer configuration has been set up."
 echo ""
 
 # Delete the install script

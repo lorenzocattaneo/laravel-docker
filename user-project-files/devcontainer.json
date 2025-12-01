@@ -1,0 +1,22 @@
+{
+    "dockerComposeFile": "../compose.yaml",
+    "service": "app",
+    "workspaceFolder": "/var/www/html",
+    "customizations": {
+      "vscode": {
+        "extensions": [
+            "DEVSENSE.phptools-vscode",
+            "laravel.vscode-laravel",
+            "cweijan.vscode-database-client2",
+            "ms-azuretools.vscode-docker",
+            "GitHub.copilot",
+            "GitHub.copilot-chat",
+            "Anthropic.claude-code"
+        ],
+        "settings": {
+          "files.eol": "\n"
+        }
+      }
+    }
+  }
+  

@@ -67,7 +67,7 @@ To add a service you can run a custom command as such:
 ```yaml
  # example configuration for a queue worker
  queue:
-    image: lorenzocattaneo/laravel:8.4-dev
+    image: lorenzocattaneo/laravel:8.5-dev
     command: php artisan queue:listen
     volumes:
       - .:/var/www/html
